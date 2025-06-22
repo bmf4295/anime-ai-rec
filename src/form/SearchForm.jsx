@@ -1,33 +1,44 @@
 import { useState } from 'react';
+import getAIRecommendation from '../scripts/OpenAI_API/AIRec';
 
-const SearchForm = ({ onSubmit }) => {
+
+const SearchForm = () => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = (e) => {
-        e.preventDefault(); if (inputValue.trim()) {
-            onSubmit(inputValue.trim());
+        e.preventDefault(); 
+        if (inputValue.trim()) {
+            getAIRecommendation(inputValue.trim());
         }
+        
     };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
+    const handleSubmitOnEnter = (e) => {
+        if (e.key === 'Enter') {      
+            handleSubmit(e);
+        }
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="  rounded-full bg-blue-800 w-full flex flex-row items-center">
-            <div className="flex flex-row items-center">
+        <form onSubmit={handleSubmit} className="flex flex-row items-center rounded-full bg-blue-600 w-full ">
+            <div className="flex flex-row">
                 <input
                     id="search-input"
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
-                    placeholder="username"
+                    onKeyDown={handleSubmitOnEnter}
+                    placeholder="Enter your favorite anime..."
                     className="w-full px-4 py-2 rounded-full focus:outline-none"
                 />
                 <button
                     type="submit"
                     disabled={!inputValue.trim()}
-                    className="w-1/4 mx-auto bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="w-1/4 mx-auto bg-blue-700 hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                     <span>&#8594;</span>
                 </button>
