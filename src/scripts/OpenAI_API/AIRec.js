@@ -16,7 +16,7 @@ const getAIRecommendation = async (FavoriteAnimeTitle) => {
    
     });
    recommendations = response.output_text.split(',').map(title => title.trim());
-   RecommendedAnimeInfo = await AnimeSearch(recommendations);
+   //RecommendedAnimeInfo = await AnimeSearch(recommendations);
 };
 
 export default getAIRecommendation;
