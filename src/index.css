@@ -22,3 +22,18 @@
   width: 1em; /* to prevent the text from jumping */
   text-align: left;
 }
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 1.5s ease-out forwards;
+}

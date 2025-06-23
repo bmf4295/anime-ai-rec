@@ -4,7 +4,7 @@ import { SiCrunchyroll, SiNetflix, SiFunimation } from 'react-icons/si';
 import {FaXTwitter} from 'react-icons/fa6';
 
 
-const AnimeCard = ({ anime}) => {
+const AnimeCard = ({ anime, index }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const iconMap = {
@@ -26,11 +26,14 @@ const AnimeCard = ({ anime}) => {
     const showReadMoreButton = description.length > 250;
 
     return (
-        <div className="max-w-2xl bg-white rounded-xl shadow-md overflow-hidden md:max-w-4xl m-4 flex flex-col md:flex-row">
+        <div 
+            className="w-full bg-white rounded-xl shadow-md overflow-hidden md:max-w-4xl flex flex-col md:flex-row animate-fadeInDown"
+            style={{ animationDelay: `${index * 100}ms` }}
+        >
             {/* Left Side: Image */}
-            <div className="md:flex-shrink-0 md:w-1/3">
+            <div className="md:flex-shrink-0 md:w-1/3 bg-gray-800">
                 <img 
-                    className="h-48 w-full object-cover md:h-full"
+                    className="h-full w-full object-contain md:object-cover"
                     src={anime.coverImage.large} 
                     alt={`Cover for ${anime.title.english || anime.title.romaji}`} 
                 />

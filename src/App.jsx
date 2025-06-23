@@ -49,8 +49,8 @@ function App() {
         </div>
         {RecommendationData && (
           <div id="anime-results-container" className="flex flex-wrap justify-center gap-4 p-4">
-            {RecommendationData.map(anime => (
-              <AnimeCard key={anime.id} anime={anime} />
+            {RecommendationData.map((anime, index) => (
+              <AnimeCard key={anime.id} anime={anime} index={index} />
             ))}
           </div>
         )}
