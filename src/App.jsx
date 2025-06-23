@@ -1,5 +1,7 @@
 import SearchForm from './form/SearchForm';
 import AnimeCard from './AnimeCard/AnimeCard'
+import LoadingSpinner from './loadingSpinner/loadingSpinner';
+import Error from './error/Error';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { ANIME_QUERY } from './scripts/AniChartAPI/AnimeSearch';
@@ -33,14 +35,17 @@ function App() {
     <>
       <div className="bg-sky-500 items-center justify-center min-h-screen flex flex-col space-y-8 w-full">
         <h1 className='text-8xl'>AnimeRec.io</h1>
-        <div className="card">
+        <div className="card w-full max-w-2xl flex flex-col items-center">
           <SearchForm onSubmit={handleSearch} />
 
           {/* Use your manual isLoading state for the loading message */}
-          {isLoading && <p>Finding your recommendations...</p>}
+          {isLoading && (
+            <div className="mt-8">
+              <LoadingSpinner />
+            </div>
+          )}
 
-          {/* But use the hook's error state for GraphQL errors */}
-          {error && <p>Oh no! Something went wrong fetching details: {error.message}</p>}
+          <Error error={error} />
         </div>
         {RecommendationData && (
           <div id="anime-results-container" className="flex flex-wrap justify-center gap-4 p-4">
