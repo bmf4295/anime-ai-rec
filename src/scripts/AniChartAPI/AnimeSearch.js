@@ -4,24 +4,20 @@ import { gql } from '@apollo/client';
 export const ANIME_QUERY = gql`
   query ($search: String) {
     Media(search: $search, type: ANIME) {
-      title {
-        romaji
+    id  
+    title {
         english
         native
       }
-      format
-      status
       episodes
       duration
       startDate {
         year
         month
-        day
       }
       endDate {
         year
         month
-        day
       }
       genres
       averageScore
@@ -29,6 +25,10 @@ export const ANIME_QUERY = gql`
       coverImage {
         large
         medium
+      }
+      externalLinks {
+        site
+        url
       }
     }
   }

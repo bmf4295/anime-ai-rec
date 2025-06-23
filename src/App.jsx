@@ -1,4 +1,5 @@
 import SearchForm from './form/SearchForm';
+import AnimeCard from './AnimeCard/AnimeCard'
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { ANIME_QUERY } from './scripts/AniChartAPI/AnimeSearch';
@@ -24,7 +25,6 @@ function App() {
     // Extract the data from the results and update state
     const finalData = results.map(result => result.data.Media).filter(Boolean);
 
-    console.log(finalData);
     SetRecommendationData(finalData);
     setIsLoading(false);
   };
@@ -42,6 +42,13 @@ function App() {
           {/* But use the hook's error state for GraphQL errors */}
           {error && <p>Oh no! Something went wrong fetching details: {error.message}</p>}
         </div>
+        {RecommendationData && (
+          <div id="anime-results-container" className="flex flex-wrap justify-center gap-4 p-4">
+            {RecommendationData.map(anime => (
+              <AnimeCard key={anime.id} anime={anime} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   )
