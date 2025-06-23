@@ -7,6 +7,7 @@ export const ANIME_QUERY = gql`
     id  
     title {
         english
+        romaji
         native
       }
       episodes

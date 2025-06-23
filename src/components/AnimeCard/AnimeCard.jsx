@@ -77,9 +77,14 @@ const AnimeCard = ({ anime, index }) => {
                 </div>
 
                 {/* Footer Info */}
-                <div className="text-xs text-gray-500 mt-4">
+                <div className="text-sm text-gray-500 mt-4">
                     <p>{anime.episodes || 'N/A'} episodes &bull; {anime.duration || 'N/A'} min/ep</p>
-                    <p>Aired: {anime.startDate.month}/{anime.startDate.year} to {anime.endDate.month ? `${anime.endDate.month}/${anime.endDate.year}` : 'Present'}</p>
+                    <p>
+                        Aired: {new Date(anime.startDate.year, (anime.startDate.month ? anime.startDate.month - 1 : 0)).toLocaleDateString('default', { month: 'long', year: 'numeric' })} 
+                        -{anime.endDate && anime.endDate.month ? (
+                            new Date(anime.endDate.year, anime.endDate.month - 1).toLocaleDateString('default', { month: 'long', year: 'numeric' })
+                        ) : 'Present'}
+                    </p>
                     <p>Avg. Score: {anime.averageScore || 'N/A'}%</p>
                 </div>
 
