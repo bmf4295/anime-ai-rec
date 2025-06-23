@@ -1,16 +1,13 @@
 import { useState } from 'react';
-import getAIRecommendation from '../scripts/OpenAI_API/AIRec';
 
-
-const SearchForm = () => {
+const SearchForm = ({onSubmit}) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
         if (inputValue.trim()) {
-            getAIRecommendation(inputValue.trim());
+           onSubmit(inputValue.trim());
         }
-        
     };
 
     const handleInputChange = (e) => {

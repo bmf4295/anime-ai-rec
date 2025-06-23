@@ -1,7 +1,35 @@
-//TODO: Impleament AnimeSearch function to search for anime titles using AniChart API and GraphQL
-// Use the titles array to search for each title and return an array of anime objects with relevant information
-let AnimeSearch = async (titles)=> {
-    
-}
+import { gql } from '@apollo/client';
 
-export default AnimeSearch;
+
+export const ANIME_QUERY = gql`
+  query ($search: String) {
+    Media(search: $search, type: ANIME) {
+      title {
+        romaji
+        english
+        native
+      }
+      format
+      status
+      episodes
+      duration
+      startDate {
+        year
+        month
+        day
+      }
+      endDate {
+        year
+        month
+        day
+      }
+      genres
+      averageScore
+      description(asHtml: false)
+      coverImage {
+        large
+        medium
+      }
+    }
+  }
+`;
