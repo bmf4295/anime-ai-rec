@@ -1,7 +1,7 @@
-import SearchForm from './form/SearchForm';
-import AnimeCard from './AnimeCard/AnimeCard'
-import LoadingSpinner from './loadingSpinner/loadingSpinner';
-import Error from './error/Error';
+import SearchForm from './components/form/SearchForm';
+import AnimeCard from './components/AnimeCard/AnimeCard'
+import LoadingSpinner from './components/loadingSpinner/loadingSpinner';
+import Error from './components/error/Error';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { ANIME_QUERY } from './scripts/AniChartAPI/AnimeSearch';
