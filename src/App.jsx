@@ -5,7 +5,6 @@ import Error from './components/error/Error';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { ANIME_QUERY } from './scripts/AniChartAPI/AnimeSearch';
-import getAIRecommendation from './scripts/OpenAI_API/AIRec';
 function App() {
   const [RecommendationData, SetRecommendationData] = useState([]);
 
@@ -16,19 +15,43 @@ function App() {
   const handleSearch = async (searchValue) => {
     SetRecommendationData([]);
     setIsLoading(true);
-    const recommendedAnime = await getAIRecommendation(searchValue);
 
-    const detailsPromises = recommendedAnime.map(name =>
-      getAnimeDetails({ variables: { search: name } })
-    );
 
-    const results = await Promise.all(detailsPromises);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/recommendations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ anime: searchValue }),
+      });
+      const data = await response.json();
+      const recommendedNames = data.recommendations;
+       if (!recommendedNames || recommendedNames.length === 0) {
+        setIsLoading(false);
+        return; // Exit if no names are returned
+      }
+      // Use the local variable `recommendedNames` to create the promises.
+      const detailsPromises = recommendedNames.map(name =>
+        getAnimeDetails({ variables: { search: name } })
+      );
+        const results = await Promise.all(detailsPromises);
 
-    // Extract the data from the results and update state
-    const finalData = results.map(result => result.data.Media).filter(Boolean);
+        const finalData = results.map(result => result.data.Media).filter(Boolean);
+        SetRecommendationData(finalData);
+    } catch (err) {
+      console.error("An error occurred during search:", err);
+    }finally {
+      setIsLoading(false);
+    }
 
-    SetRecommendationData(finalData);
-    setIsLoading(false);
+
+    
+
+
+    
+    
   };
 
   return (
