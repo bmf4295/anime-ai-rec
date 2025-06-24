@@ -27,7 +27,7 @@ const AnimeCard = ({ anime, index }) => {
 
     return (
         <div 
-            className="w-full bg-white rounded-xl shadow-md overflow-hidden md:max-w-4xl flex flex-col md:flex-row animate-fadeInDown"
+            className="w-full bg-white rounded-xl m-1 shadow-md overflow-hidden md:max-w-4xl flex flex-col md:flex-row animate-fadeInDown transition-all duration-200 hover:shadow-2xl hover:scale-103 hover:-translate-y-1"
             style={{ animationDelay: `${index * 100}ms` }}
         >
             {/* Left Side: Image */}

@@ -10,8 +10,6 @@ const client = new ChatOpenAI({
     temperature: 0.2
 });
 
-
-
 let recommendations = [];
 const getAIRecommendation = async (FavoriteAnimeTitle) => {
     // Define the schema for the response

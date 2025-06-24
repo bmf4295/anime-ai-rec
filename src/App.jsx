@@ -33,8 +33,8 @@ function App() {
 
   return (
     <>
-      <div className="bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 animate-gradient items-center justify-center min-h-screen flex flex-col space-y-8 w-full">
-        <h1 className='pt-4 text-4xl md:text-8xl'>AnimeRec.io</h1>
+      <div className="font-inter bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-400 animate-gradient items-center justify-center min-h-screen flex flex-col space-y-8 w-full">
+        <h1 className='font-gugi pt-4 text-4xl md:text-8xl'>AnimeRec.io</h1>
         <div className="card w-full max-w-2xl flex flex-col items-center">
           <SearchForm onSubmit={handleSearch} />
 
