@@ -32,8 +32,8 @@ const getAIRecommendation = async (FavoriteAnimeTitle) => {
         const parsed = JSON.parse(output);
         recommendations = responseSchema.parse(parsed);
     } catch (e) {
-        //recommend null if there is an error, so that we get an error when querying the API
-        recommendations = null;
+        //recommend an empty array if there is an error, so that we get an error when querying the API
+        recommendations = [];
     }
     return recommendations;
 };
